@@ -2,15 +2,21 @@ import random
 
 palavra_skate = "SKATE"
 
+def tentar_manobra(manobra):
+    dificuldade = {"Ollie": 3, "Kickflip": 5, "Hellflip": 6, "Hardflip": 7}
+    sucesso = random.randint(1, 10) > dificuldade[manobra]
+    return sucesso
+
 def jogar_round(jogador_ativo, jogador_passivo, letras_ativo, letras_passivo):
     print(f"\n--- Vez de {jogador_ativo} ---")
-    manobra_escolhida = input(f"{jogador_ativo} manda: ").strip().title()
+    manobra_escolhida = input(f"{jogador_ativo} manda Ollie, Kickflip, Hellflip ou Hardflip: ").strip().title()
 
-    acertou = input(f"{jogador_passivo}, você acertou o(a) '{manobra_escolhida}'? (s/n): ").lower()
+    acertou = tentar_manobra(manobra_escolhida)    
+    print(f"{jogador_passivo}, você {'acertou' if acertou else 'errou'} o {manobra_escolhida}")
 
-    if acertou == 's':
+    if acertou:
         print(f"Boa! {jogador_passivo} acertou!")
-    elif acertou == 'n':
+    elif acertou:
         print(f"Que pena, {jogador_passivo} errou!")
         if len(letras_passivo) < len(palavra_skate):
             letras_passivo += palavra_skate[len(letras_passivo)]
