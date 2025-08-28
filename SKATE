@@ -2,36 +2,36 @@ import random
 
 palavra_skate = "SKATE"
 
-def tentar_manobra(manobra):
-    dificuldade = {"Ollie": 3, "Kickflip": 5, "Hellflip": 6, "Hardflip": 7}
-    sucesso = random.randint(1, 10) > dificuldade[manobra]
-    return sucesso
-
 def jogar_round(jogador_ativo, jogador_passivo, letras_ativo, letras_passivo):
     print(f"\n--- Vez de {jogador_ativo} ---")
-    manobra_escolhida = input(f"{jogador_ativo} manda Ollie, Kickflip, Hellflip ou Hardflip: ").strip().title()
-
-    acertou = tentar_manobra(manobra_escolhida)    
-    print(f"{jogador_passivo}, você {'acertou' if acertou else 'errou'} o {manobra_escolhida}")
-
-    if acertou:
-        print(f"Boa! {jogador_passivo} acertou!")
-    elif acertou:
-        print(f"Que pena, {jogador_passivo} errou!")
-        if len(letras_passivo) < len(palavra_skate):
-            letras_passivo += palavra_skate[len(letras_passivo)]
-            print(f"{jogador_passivo} agora tem: {letras_passivo}")
+    
+    manobra_escolhida = input(f"{jogador_ativo}, qual manobra você vai mandar?: ").strip().title()
+    
+    resposta_jogador_ativo = input(f"{jogador_ativo}, acertou{manobra_escolhida}? (s/n): ").strip().lower()
+    acertou_ativo = (resposta_jogador_ativo == 's')
+    
+    if acertou_ativo:
+        print(f"Boa, {jogador_ativo} acertou o {manobra_escolhida}!")
+        print(f"\nAgora é a vez de {jogador_passivo} tentar copiar.")
+        
+        resposta_jogador_passivo = input(f"{jogador_passivo}, você acertou o {manobra_escolhida}? (s/n): ").strip().lower()
+        acertou_passivo = (resposta_jogador_passivo == 's')
+        
+        if acertou_passivo:
+            print(f"Boa, {jogador_passivo} acertou o {manobra_escolhida} também!")
+            return letras_passivo, letras_ativo, True
         else:
-            print(f"{jogador_passivo} já completou 'SKATE'!")
+            print(f"Que pena, {jogador_passivo} errou o {manobra_escolhida}!")
+            if len(letras_passivo) < len(palavra_skate):
+                letras_passivo += palavra_skate[len(letras_passivo)]
+                print(f"{jogador_passivo} agora tem: {letras_passivo}")
+            else:
+                print(f"{jogador_passivo} já completou 'SKATE'!")
+            return letras_passivo, letras_ativo, True
     else:
-        print("Resposta inválida. Considere como erro.")
-        if len(letras_passivo) < len(palavra_skate):
-            letras_passivo += palavra_skate[len(letras_passivo)]
-            print(f"{jogador_passivo} agora tem: {letras_passivo}")
-        else:
-            print(f"{jogador_passivo} já completou 'SKATE'!")
-
-    return letras_passivo, letras_ativo
+        print(f"Que pena, {jogador_ativo} errou o {manobra_escolhida}!")
+        print("Você passa a vez para o outro jogador.")
+        return letras_passivo, letras_ativo, False
 
 def iniciar_jogo_off():
     jogador1_nome = input("Nome do Jogador 1: ").strip()
@@ -46,36 +46,24 @@ def iniciar_jogo_off():
 
     while letras_jogador1 != palavra_skate and letras_jogador2 != palavra_skate:
         if turno == jogador1_nome:
-            letras_jogador2, letras_jogador1 = jogar_round(jogador1_nome, jogador2_nome, letras_jogador1, letras_jogador2)
-            turno = jogador2_nome
+            letras_jogador2, letras_jogador1, continua_turno = jogar_round(jogador1_nome, jogador2_nome, letras_jogador1, letras_jogador2)
+            if not continua_turno:
+                turno = jogador2_nome
         else:
-            letras_jogador1, letras_jogador2 = jogar_round(jogador2_nome, jogador1_nome, letras_jogador2, letras_jogador1)
-            turno = jogador1_nome
+            letras_jogador1, letras_jogador2, continua_turno = jogar_round(jogador2_nome, jogador1_nome, letras_jogador2, letras_jogador1)
+            if not continua_turno:
+                turno = jogador1_nome
 
         print(f"\n--- Placar Atual ---")
         print(f"{jogador1_nome}: {letras_jogador1}")
         print(f"{jogador2_nome}: {letras_jogador2}")
-
+        
         if letras_jogador1 == palavra_skate:
             print(f"\n{jogador2_nome} venceu! {jogador1_nome} levou um S.K.A.T.E. completo.")
             break
         elif letras_jogador2 == palavra_skate:
             print(f"\n{jogador1_nome} venceu! {jogador2_nome} levou um S.K.A.T.E. completo.")
             break
-
-        # Pergunta quem puxa a próxima manobra
-        quem_puxa = input("Quem puxa a próxima manobra? (Digite a primeira letra do nome): ").strip().lower()
-
-        if turno == jogador1_nome:
-            if quem_puxa == jogador2_nome[0].lower():
-                turno = jogador2_nome
-            else:
-                print("Resposta incorreta! O turno continua com", turno)
-        else:
-            if quem_puxa == jogador1_nome[0].lower():
-                turno = jogador1_nome
-            else:
-                print("Resposta incorreta! O turno continua com", turno)
 
 if __name__ == "__main__":
     iniciar_jogo_off()
