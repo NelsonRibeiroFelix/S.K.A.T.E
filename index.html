@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.K.A.T.E. Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="logo-text">S.K.A.T.E.</h1>
+        <div id="setup-screen">
+            <h2>Configuração do Jogo</h2>
+            <div class="input-group">
+                <label for="player1-name">Nome do Jogador 1:</label>
+                <input type="text" id="player1-name" placeholder="Ex: Bob Burnquist">
+            </div>
+            <div class="input-group">
+                <label for="player2-name">Nome do Jogador 2:</label>
+                <input type="text" id="player2-name" placeholder="Ex: Tony Hawk">
+            </div>
+            <button id="start-btn" class="button-start">Iniciar Jogo</button>
+        </div>
+
+        <div id="game-screen" class="hidden">
+            <h2 id="turn-display"></h2>
+            <p id="game-message"></p>
+            
+            <div id="trick-input-area" class="hidden">
+                <div class="input-group">
+                    <label for="trick-name">Qual manobra você vai mandar?</label>
+                    <input type="text" id="trick-name" placeholder="Ex: Heelflip">
+                </div>
+                <button id="submit-trick-btn" class="button-mandar">Mandar Manobra</button>
+            </div>
+
+            <div id="trick-result-area" class="hidden">
+                <h3 id="current-trick-display"></h3>
+                <div class="button-group">
+                    <button id="success-btn" class="button-acertou">Acertou!</button>
+                    <button id="fail-btn" class="button-errou">Errou!</button>
+                </div>
+            </div>
+
+            <div id="copy-trick-area" class="hidden">
+                <h3 id="trick-to-copy-display"></h3>
+                <div class="button-group">
+                    <button id="copy-success-btn" class="button-acertou">Acertou!</button>
+                    <button id="copy-fail-btn" class="button-errou">Errou!</button>
+                </div>
+            </div>
+
+            <div id="score-board">
+                <h3>Placar Atual</h3>
+                <div class="score-container">
+                    <p id="player1-score"></p>
+                    <p id="player2-score"></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="end-game-screen" class="hidden">
+            <h2 id="winner-display"></h2>
+            <button id="restart-btn" class="button-restart">Jogar Novamente</button>
+        </div>
+    </div>
+
+    <audio id="start-sound" src="https://www.soundboard.com/mediafiles/20/203487-d46e2978-55cb-44f3-be25-6352c3c62391.mp3" preload="auto"></audio>
+    <audio id="success-sound" src="https://www.soundboard.com/mediafiles/20/203487-160100f7-5e6d-4951-b0e5-7945d8123992.mp3" preload="auto"></audio>
+    <audio id="fail-sound" src="https://www.soundboard.com/mediafiles/20/203487-43a19b7a-e421-4b13-a4c3-e2e46b97669d.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

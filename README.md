@@ -31,4 +31,41 @@ Este é um jogo de S.K.A.T.E. para dois jogadores que roda diretamente no seu te
 * Este jogo é baseado em texto e não simula a execução real de manobras. A honestidade dos jogadores é essencial!
 * Não há uma lista predefinida de manobras válidas no código atual. Os jogadores podem usar qualquer termo.
 
-Divirta-se jogando S.K.A.T.E. no seu terminal!
+# S.K.A.T.E. - Jogo no Navegador
+
+## Funcionalidades
+
+* **Interface Intuitiva:** Jogue usando botões e campos de texto diretamente na página.
+* **Tema Visual:** O design do jogo e as mensagens têm a linguagem e o estilo do universo do skate.
+* **Placar Dinâmico:** Acompanhe o progresso de cada jogador em tempo real.
+
+---
+
+## Como Jogar
+
+1.  **Baixe os Arquivos:** Salve os três arquivos do projeto na mesma pasta no seu computador:
+    * `index.html` (estrutura do jogo)
+    * `style.css` (estilo visual)
+    * `script.js` (lógica do jogo)
+
+2.  **Abra o Jogo:** Abra o arquivo `index.html` em qualquer navegador (como Chrome, Firefox ou Edge).
+
+3.  **Inicie a Partida:** Na tela inicial, digite o nome dos jogadores e clique em **"Iniciar Jogo"**.
+
+---
+
+## Regras do Jogo
+
+* O jogador ativo escolhe e "manda" uma manobra.
+* O jogador passivo tenta "copiar" a manobra.
+* Se o jogador passivo **errar**, ele recebe a próxima letra da palavra "S.K.A.T.E.".
+* O turno passa para o outro jogador.
+* O primeiro jogador a completar as cinco letras da palavra "S.K.A.T.E." perde o jogo.
+
+---
+
+## Observações
+
+Este jogo não exige a execução de manobras de verdade. A honestidade e a diversão são a parte mais importante!
+
+Divirta-se!
